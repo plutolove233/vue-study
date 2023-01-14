@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<script type="text/javascript">
+	let number = 20;
+	let person = {
+		name: 'xxx',
+	}
+	// 回顾defineProperty
+	Object.defineProperty(person, 'age', {
+		// 如果设置了 set 或 get, 就不能设置 writable 和 value 中的任何一个
+		// value: 20,
+		// writable: true, // 属性可修改
+		// enumerable: true, // 属性可枚举
+		// configurable: true, // 属性可删除
+		// 当有人读取number属性时，get就会被调用，且返回值就是number的值
+		get() {
+			return number
+		},
+		// 当有人修改person的number时，set就会被调用，且会收到修改的值
+		// set(value) {
+		// 	console.log('update number property, value = ', value);
+		// }
+	})
+
+	// 数据代理：通过一个对象代理对另一个对象中属性的操作
+	let obj1 = {
+		x: 100
+	};
+	let obj2 = {
+		y: 200
+	};
+	Object.defineProperty(obj2, 'x', {
+		get() {
+			return obj1.x;
+		},
+		set(value) {
+			obj1.x = value
+		}
+	})
+</script>
+
+<body>
+	<div id="root">
+		<h2>school name is {{name}} </h2>
+		<h2>school address is {{address}}</h2>
+	</div>
+</body>
+
+<script>
+	// vue中如何实现数据代理
+	// 通过vm对象实现对data中的数据代理，更方便操作data中的数据 原理：Object.defineProperty
+	// _data中为数据劫持
+	const vm = new Vue({
+		el: '#root',
+		data() {
+			return {
+				name: 'NCEPU',
+				address: 'number2@BeiNong street'
+			}
+		}
+	});
+	console.log(vm._data.name, vm._data.address);
+</script>
+
+</html>

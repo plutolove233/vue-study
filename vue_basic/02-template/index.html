@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<!-- 
+    插值语法：用于解析标签体内容
+    指令语法：用于解析标签（属性，内容，绑定事件...）
+             v-bind:href='...' ===> :href='...'
+             有很多指令，形式都是v-???
+ -->
+
+<body>
+    <div id="root">
+        <h1>插值语法</h1>
+        <h3>hello, {{name}} </h3>
+        <hr />
+        <h1>指令语法</h1>
+        <a :href="url"> click me to baidu</a>
+        <hr />
+        <h1>数据绑定</h1>
+        <div>
+            单向数据绑定: <input type="text" :value="msg">
+            双向数据绑定：<input type="text" v-model:value="msg">
+        </div>
+        <hr />
+    </div>
+</body>
+
+<script type="text/javascript">
+    const v = new Vue({
+        data() { // data函数式写法，更推荐，必须返回一个Object，该函数由Vue管理，必须是function不能是()=>
+            return {
+                name: 'xxx',
+                url: "https://baidu.com"
+            }
+        }
+    });
+    setTimeout(() => {
+        v.$mount('#root'); // 动态绑定对象
+    }, 1000);
+</script>
+
+</html>

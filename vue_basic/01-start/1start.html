@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<title></title>
+</head>
+
+<!-- 
+	真实开发中只有一个vue实例，并会配合组件一起使用
+	{{xxx}} xxx为js表达式，且xxx可以自动读取data中的所有属性
+	一旦data中的数据发生了改变，那么模板中的相应地方也会发生改变
+ -->
+
+<body>
+	<div class="root">
+		<h1>
+			Hello World, {{name}}
+		</h1>
+		<button>
+			click me
+		</button>
+	</div>
+</body>
+
+<script type="text/javascript">
+	Vue.config.productionTip = false;
+	// 容器和vue实例的关系的是一一对应的
+	const v = new Vue({
+		el: '.root', // el用于指定当前的vue实例为哪个容器服务，值通常为css选择器
+		data: { // 用于存储数据，供el所指定的容器去使用
+			name: 'Vue',
+		}
+	})
+</script>
+
+</html>
