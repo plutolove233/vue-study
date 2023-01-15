@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        * {
+            margin: 20px;
+        }
+
+        .demo1 {
+            height: 50px;
+            background-color: skyblue;
+        }
+
+        .passivePart {
+            height: 200px;
+            background-color: pink;
+            overflow: auto;
+        }
+
+        li {
+            padding-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <h1>
+            Welcome to {{name}}
+        </h1>
+        <button @click="showNotice">
+            no param
+        </button>
+        <button @click="action2($event, username)">
+            with param,$event is event(reserved word)
+        </button>
+
+        <hr />
+        <!-- 阻止默认事件 -->
+        <a href="https://baidu.com" @click.prevent="showNotice">click me to show message</a>
+
+        <!-- 组织事件冒泡 -->
+        <div @click="showNotice" class="demo1">
+            <!-- 阻止了从里层到外层的事件冒泡 -->
+            <button @click.stop="showNotice">click to show</button>
+        </div>
+
+        <!-- 事件只触发一次 -->
+        <div @click="showNotice" class="demo1">
+            <button @click.once="showNotice">
+                click to test once
+            </button>
+        </div>
+
+        <!-- 只有event.target是当前操作的元素时才触发事件 -->
+        <div @click.self="showNotice" class="demo1">
+            <button @click="showNotice">
+                click to test self
+            </button>
+        </div>
+
+        <!-- passive事件的默认行为立即执行，无需等待回调执行完毕 -->
+        <!-- scroll 会优先执行 -->
+        <div class="passivePart" @wheel.passive="demoWheel">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        data() {
+            return {
+                name: 'VUE',
+                username: 'xxx'
+            };
+        },
+        methods: {
+            showNotice(e) {
+                console.log(e.target);
+                alert('hello!');
+                // this -> vm
+            },
+            action2(event, num) {
+                console.log(event, num);
+            },
+            demoScroll() { // 滚动就执行
+                console.log('scroll');
+            },
+            demoWheel() { // 滚动滚轮执行
+                for (let i = 0; i < 10000; i++) {
+                    console.log(1);
+                }
+            },
+        }
+    });
+    vm.$mount('#root');
+</script>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        姓: <input type="text" v-model="firstName"><br /><br />
+        名: <input type="text" v-model="secondName"><br /><br />
+        全名: {{fullName}}
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        data() {
+            let firstName = '张';
+            let secondName = '三';
+            return {
+                firstName,
+                secondName,
+            };
+        },
+        computed: {
+            // 完整写法
+            // fullName: {
+            //     get() {
+            //         return this.firstName + '-' + this.secondName;
+            //     },
+            //     set(value) {
+            //         let arr = value.split('-');
+            //         this.firstName = arr[0];
+            //         this.secondName = arr[1];
+            //     }
+            // }
+
+            // 简写形式：当只读不改时可以以该形式的方式实现
+            fullName() {
+                return this.firstName + '-' + this.secondName;
+            }
+        }
+    });
+    vm.$mount('#container');
+</script>
+
+</html>

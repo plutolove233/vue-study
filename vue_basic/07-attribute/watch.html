@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <h2>
+            今天天气很{{info}}
+        </h2>
+        <button @click="changeWeather">
+            click me to change weather
+        </button>
+        <br /><br />
+        <div>
+            a={{data.a}}
+            <button @click="data.a++">click me to add a</button>
+        </div>
+        <div>
+            d={{data.c.d}}
+            <button @click="data.c.d++">click me to add d</button>
+        </div>
+        <div>
+            e={{data.c.e}}
+            <button @click="data.c.e++">click me to add e</button>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#container',
+        data() {
+            return {
+                isHot: true,
+                data: {
+                    a: 1,
+                    b: 2,
+                    c: {
+                        d: 1,
+                        e: 2
+                    }
+                }
+            }
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽'
+            }
+        },
+        // one style of writing of watch:
+        watch: {
+            // 简写形式，当不需要配置immediate和deep时可以这么写
+            info(newV, oldV) {
+                console.log(newV, oldV);
+            },
+            data: {
+                immediate: true, // 初始化时让handler调用一次
+                deep: true, // 开启深度监视，可监视对象内部值发生了改变，对象内部有一个值发生了改变就会触发
+                handler(newV, oldV) {
+                    console.log('value changed');
+                }
+            },
+            'data.a': { // 对象内部某个值发生了改变
+                handler() {
+                    console.log('a has been changed');
+                }
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot
+            },
+        },
+    })
+    /*
+    // the other writing of watch
+    vm.$watch('info', {
+        immediate: true, // 初始化时让handler调用一次
+        handler(newV, oldV) {
+            console.log(newV, oldV);
+        }
+    })
+    // simplified writing:
+    vm.$watch('info', function(newV, oldV){
+        console.log(newV, oldV)
+    })
+    */
+</script>
+
+</html>

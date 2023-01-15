@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <input type="text" placeholder="log content with enter" @keyup.enter="showMsg" style="display: block;">
+        <input type="text" placeholder="you should watch tab with key down" @keydown.tab="showMsg">
+    </div>
+</body>
+
+<!-- 
+    系统修饰键，ctrl、alt、shift、meta
+    1. 配合keyup使用，在按下修饰键的同时，再按下其他键，随后释放其他键事件才会触发
+        eg: @keyup.ctrl.y
+    2. 配合keydown使用，正常触发事件
+ -->
+
+<script type="text/javascript">
+    const vm = new Vue({
+        data() { 
+            return {
+                name: 'yizhigopher',
+            }
+        },
+        methods: {
+            showMsg(e) {
+                console.log(e.target.value);
+            }
+        }
+    });
+    vm.$mount('#root');
+</script>
+
+</html>
