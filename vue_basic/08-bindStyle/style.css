@@ -1,0 +1,25 @@
+.basic {
+    width: 400px;
+    height: 100px;
+    border: 1px solid black;
+}
+
+.happy {
+    background: linear-gradient(to top, #fad0c4 0%, #fad0c4 1%, #ffd1ff 100%);
+}
+
+.sad {
+    background: grey;
+}
+
+.normal {
+    background: skyblue;
+}
+
+.s1 {
+    border-radius: 10px;
+}
+
+.s2 {
+    font-size: large;
+}

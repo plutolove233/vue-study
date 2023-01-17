@@ -1,0 +1,21 @@
+<script>
+    let demo1 = {
+        name: 'xxx',
+        address: 'yyy'
+    }
+
+    function observer(obj) {
+        const keys = Object.keys(obj);
+        keys.forEach(key => {
+            Object.defineProperty(this, key, {
+                get() {
+                    return obj[key]
+                },
+                set(value) {
+                    obj[key] = value
+                }
+            })
+        });
+    }
+    const obs = demo1 = new observer(demo1);
+</script>

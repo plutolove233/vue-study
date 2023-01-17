@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <button @click="add">
+            click me to add one person
+        </button>
+        <!-- 遍历数组 -->
+        <ul>
+            <li v-for="(item, index) in persons" :key="item.id">
+                姓名: {{item.name}}; 年龄: {{item.age}}
+                <input type="text">
+            </li>
+
+        </ul>
+        <hr />
+        <!-- 遍历对象 -->
+        <ul>
+            <li v-for="(item, index) in car" :key="index">
+                {{index}} => {{item}}
+            </li>
+        </ul>
+        <!-- 遍历次数 -->
+        <hr />
+        <ul>
+            <li v-for="(item, index) in 10" :key="index">
+                value: {{item}}; index: {{index}}
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#container',
+        data() {
+            return {
+                persons: [{
+                        id: 1,
+                        name: 'xxx',
+                        age: 12,
+                    },
+                    {
+                        id: 2,
+                        name: 'yyy',
+                        age: 18,
+                    },
+                    {
+                        id: 3,
+                        name: 'yizhigopher',
+                        age: 20,
+                    }
+                ],
+
+                car: {
+                    name: 'Audi',
+                    price: '80w'
+                }
+            }
+        },
+        methods: {
+            add() {
+                const p = {
+                    id: 4,
+                    name: 'zzz',
+                    age: 40
+                }
+                this.persons.unshift(p)
+            }
+        },
+    })
+</script>
+
+</html>

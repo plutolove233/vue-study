@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title></title>
+</head>
+
+<body>
+    <div id="content">
+        <div class="basic" :class="mood" @click="changeMood">
+        </div>
+
+        <div :class="styleArr">
+            Hello World
+        </div>
+
+        <div :style="obj2">nihao</div>
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el: '#content',
+        data() {
+            return {
+                mood: 'happy', // 样式类名不确定，数量确定，需动态绑定
+                styleArr: ['basic', 's1', 's2'], // 类名不确定，数量也不确定
+                obj: { // 类名确定，数量确定，动态决定用不用
+                    s1: false,
+                    s2: true
+                },
+                obj2: {
+                    fontSize: '40px'
+                }
+            }
+        },
+        methods: {
+            changeMood() {
+                this.mood = 'sad'
+            }
+        },
+    })
+</script>
+
+</html>

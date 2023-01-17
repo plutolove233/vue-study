@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <h1>用户</h1>
+        <button @click="changeSex">change sex</button>
+        <div>
+            姓名: {{name}}
+        </div>
+        <div>
+            性别: {{sex}}
+        </div>
+        <br />
+
+        <h1>兴趣</h1>
+        <input placeholder="输入兴趣" @keyup.enter="addHobby">
+        <ul>
+            <li v-for="(h, index) in hobbies" :key="index">
+                {{h}}
+            </li>
+        </ul>
+
+        <br />
+        <h1>朋友</h1>
+        <input placeholder="输入朋友姓名" v-model="newFriendName">
+        <input placeholder="输入朋友年龄" v-model="newFriendAge">
+        <button @click="addFriend">add one</button>
+        <ul>
+            <li v-for="(f, index) in friends" :key="index">
+                {{f.name}}--{{f.age}}
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        data() {
+            return {
+                name: 'yizhigopher',
+                sex: '男',
+                hobbies: ['踢足球', '打游戏', '看小说'],
+                friends: [{
+                    name: 'Tom',
+                    age: 12,
+                }, {
+                    name: 'Jerry',
+                    age: 20
+                }],
+                newFriendName: '',
+                newFriendAge: 0,
+            }
+        },
+        methods: {
+            changeSex() {
+                // 该方法不可以修改vm的直接属性
+                // this.$set(this, sex, '女');
+                this.sex = '女'
+            },
+            addHobby(e) {
+                console.log('add hobby');
+                this.$set(this.hobbies, this.hobbies.length, e.target.value) // 等价于this.hobbies.push(...)
+                // vue中对于数组只对sort、push、shift、unshift....等操作做出响应
+            },
+            addFriend() {
+                this.$set(this.friends, this.friends.length, {
+                    name: this.newFriendName,
+                    age: this.newFriendAge
+                })
+            }
+        },
+    })
+    vm.$mount('#main')
+</script>
+
+</html>

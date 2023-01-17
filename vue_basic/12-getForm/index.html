@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <form>
+            <div>
+                账号: <input type="text" name="account">
+            </div>
+            <div>
+                密码: <input type="password" name="pwd">
+            </div>
+            <div>
+                性别: 男<input type="radio" name="sex"> 女<input type="radio" name="sex">
+            </div>
+            <div>
+                年龄: <input type="number" name="age">
+            </div>
+            <div>
+                爱好:
+                学习<input type="checkbox" name="hobby">
+                打游戏<input type="checkbox" name="hobby">
+                吃饭<input type="checkbox" name="hobby">
+            </div>
+            <div>
+                <select>
+                    <option v-for="(a, index) in areas" :key="index">
+                        {{a}}
+                    </option>
+                </select>
+            </div>
+        </form>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#main',
+        data() {
+            return {
+                areas: ['上海', '北京', '武汉'],
+            }
+        },
+    })
+</script>
+
+</html>
