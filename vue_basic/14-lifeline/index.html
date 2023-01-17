@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <h1>
+            n is {{n}}
+        </h1>
+        <button @click="addN">click me to add</button>
+        <button @click="des">click me to destroy vm</button>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#main',
+        data() {
+            return {
+                n: 1,
+            }
+        },
+        methods: {
+            addN() {
+                console.log('n++');
+            },
+            des() {
+                this.$destroy()
+            }
+        },
+
+        beforeCreate() {
+            console.log('--------before create--------');
+            console.log('无法通过vm获取data数据，methods中的方法');
+        },
+
+        created() {
+            console.log('--------created--------')
+            console.log('可以通过vm获取data和配置的方法，但是还没有挂载到相关的模板');
+            console.log('n=' + this.n);
+            // debugger;
+        },
+
+        beforeMount() {
+            console.log('--------before mount--------')
+            console.log('呈现的仍是未经vue编译的DOM结构，所有对DOM的操作都不会奏效');
+            // debugger;
+        },
+
+        mounted() {
+            console.log('--------mounted--------')
+            console.log('页面呈现的是经过vue编译的dom，对dom操作均有效，尽可能避免');
+        },
+
+        beforeUpdate() {
+            console.log('--------before update--------')
+            console.log('此时数据是新的，但是页面内容是旧的');
+            console.log('n=' + this.n);
+        },
+
+        updated() {
+            console.log('--------updated--------')
+            console.log('数据是新的，页面内容也是新的');
+        },
+
+        beforeDestroy() {
+            console.log('--------before destroy--------');
+            console.log('vm中所有的data，method均可用');
+            console.log('在此阶段一般进行关闭定时器，取消订阅信息等收尾操作');
+        },
+        destroyed() {
+            console.log('--------destroyed--------');
+            console.log('虽然删除了但是页面可用');
+        },
+    })
+</script>
+
+</html>

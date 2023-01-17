@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        .demo {
+            font-size: larger;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <!-- v-html测试 容易导致XSS攻击，一定要在可信内容上使用-->
+        <div v-html="str">
+        </div>
+
+        <!-- vue会在接管容器后，删去　v-cloak属性 -->
+        <div v-cloak>
+            v-cloak demo
+        </div>
+
+        <!-- v-once只渲染一次 -->
+        <h2 v-once>
+            init n is {{n}}
+        </h2>
+        <h2>
+            n is {{n}}
+        </h2>
+        <button @click="n++">click me to add n</button>
+
+        <!-- v-pre跳过该结点的编译 -->
+        <h2 v-pre>{{n}}</h2>
+
+        <!-- 自定义指令 -->
+        <!-- 函数式写法 -->
+        <span v-big="n"></span>
+        <!-- 对象式写法 -->
+        <input v-fbind="n" @input="bindNumber">
+    </div>
+
+</body>
+
+<script>
+
+    // 全局写法
+    // Vue.directive('fbind', { 
+    //     big(elem, binding) {
+    //         elem.innerText = binding.value
+    //         elem.className = 'demo'
+    //     },
+    //     fbind: {
+    //         bind(elem, binding) {
+    //             elem.value = binding.value
+    //         },
+    //         inserted(elem, binding) {
+    //             elem.focus()
+    //         },
+    //         update(elem, binding) {
+    //             elem.value = binding.value
+    //         },
+    //     }
+    // })
+    const vm = new Vue({
+        el: '#main',
+        data() {
+            return {
+                str: '<h1>v-html demo</h1>',
+                n: 1,
+            }
+        },
+        directives: { // 其中的this是windows
+            big(elem, binding) { // 指令所在模板被重新解析时触发
+                elem.innerText = binding.value
+                elem.className = 'demo'
+            },
+            fbind: {
+                bind(elem, binding) {
+                    elem.value = binding.value
+                },
+                inserted(elem, binding) {
+                    elem.focus()
+                },
+                update(elem, binding) {
+                    elem.value = binding.value
+                },
+            }
+        },
+        methods: {
+            bindNumber(e) {
+                this.n = e.target.value
+            }
+        },
+    })
+    // 模拟延迟，用于v-cloak测试
+    // setTimeout(() => {
+    //     vm.$mount('#main')
+    // }, 5000);
+</script>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <h1 :style="{opacity}">
+            Welcome
+        </h1>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#main',
+        data() {
+            return {
+                opacity: 1,
+            }
+        },
+        // 挂载完毕：当vue完成模板解析并把初始真实dom元素加入页面后，调用mounted
+        mounted() {
+            setInterval(() => {
+                this.opacity -= 0.01
+                if (this.opacity <= 0) {
+                    this.opacity = 1
+                }
+            }, 16);
+        },
+    })
+</script>
+
+</html>

@@ -11,32 +11,40 @@
 
 <body>
     <div id="main">
-        <form>
+        <form @submit.prevent="demo">
             <div>
-                账号: <input type="text" name="account">
+                <!-- v-model.trim实现去除多余空格 -->
+                账号: <input type="text" name="account" v-model.trim="user.account">
             </div>
             <div>
-                密码: <input type="password" name="pwd">
+                密码: <input type="password" name="pwd" v-model="user.pwd">
             </div>
             <div>
-                性别: 男<input type="radio" name="sex"> 女<input type="radio" name="sex">
+                性别:
+                男<input type="radio" name="sex" value="男" v-model="user.sex">
+                女<input type="radio" name="sex" value="女" v-model="user.sex">
             </div>
             <div>
-                年龄: <input type="number" name="age">
+                <!-- v-model.number配合type='number'使用，实现值为数字 -->
+                年龄: <input type="number" name="age" v-model.number="user.age">
             </div>
             <div>
                 爱好:
-                学习<input type="checkbox" name="hobby">
-                打游戏<input type="checkbox" name="hobby">
-                吃饭<input type="checkbox" name="hobby">
+                学习<input type="checkbox" name="hobby" value="study" v-model="user.hobbies">
+                打游戏<input type="checkbox" name="hobby" value="game" v-model="user.hobbies">
+                吃饭<input type="checkbox" name="hobby" value="eat" v-model="user.hobbies">
             </div>
             <div>
-                <select>
+                <select v-model="user.area">
                     <option v-for="(a, index) in areas" :key="index">
                         {{a}}
                     </option>
                 </select>
             </div>
+            <div>
+                其他: <textarea v-model.lazy="user.other"></textarea>
+            </div>
+            <button>submit</button>
         </form>
     </div>
 </body>
@@ -46,7 +54,21 @@
         el: '#main',
         data() {
             return {
+                user: {
+                    account: '',
+                    pwd: '',
+                    age: '',
+                    sex: '',
+                    hobbies: [],
+                    area: '',
+                    other: ''
+                },
                 areas: ['上海', '北京', '武汉'],
+            }
+        },
+        methods: {
+            demo() {
+                console.log(JSON.stringify(this.user));
             }
         },
     })
