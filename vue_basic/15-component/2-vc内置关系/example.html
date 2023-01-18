@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../../js/vue.js">
+
+    </script>
+</head>
+
+<body>
+    <div id="main">
+        <demo :name="'xxx'"></demo>
+    </div>
+</body>
+
+<script>
+    // 此处返回的是VueComponent构造函数
+    const vc = Vue.extend({
+        template: `<h1>{{myName}}</h1>`,
+        props: ['name'],
+        data() {
+            return {
+                myName: this.name
+            }
+        },
+    })
+
+    const vm = new Vue({
+        el: '#main',
+        data() {
+            return {}
+        },
+        components: {
+            'demo': vc,
+        }
+    })
+
+    // 让组件的实例对象vc可以访问Vue原型上的属性和方法
+    // console.log(vc.prototype.__proto__ === vm.__proto__)
+</script>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <student></student>
+        <hr>
+        <school></school>
+    </div>
+</body>
+
+<script>
+    const student = Vue.extend({
+        template: `<h1>student name is {{name}}</h1>`,
+        data() {
+            return {
+                name: 'yizhigopher'
+            }
+        },
+    })
+
+    /* 
+     * 定义组件notice
+     * 1. template中如果有多行，则需用div包裹
+     * 2. data必须写成函数形式
+     * 3. 命名建议：
+     *      a. 全部小写用-连接
+     *      b. 首字母都大写（须在脚手架环境下使用）
+     *      c. 不要与html中元素名类似或相同
+     */
+    const school = Vue.extend({
+        components: {
+            'hello-vue': student,
+        },
+        template: `
+            <div>
+                <h1>School Name is {{name}}</h1>
+                <button @click='showName'>click me to show</button>
+                <hello-vue></hello-vue>
+            </div>
+        `,
+        data() {
+            return {
+                name: 'NCEPU'
+            }
+        },
+        methods: {
+            showName() {
+                alert(this.name)
+            }
+        },
+    })
+
+
+
+    // 全局注册
+    // Vue.component('student', student)
+
+    // 局部注册
+    const vm = new Vue({
+        el: '#main',
+        components: {
+            school
+        }
+    })  
+</script>
+
+</html>
