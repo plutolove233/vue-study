@@ -59,7 +59,7 @@
 
 ### mixins 混入
 
-样例[mixin.js](./03_mixin_plugin_scoped_src/mixin.js)
+样例：[mixin.js](./03_mixin_plugin_scoped_src/mixin.js)
 
 ```
     功能：可以把多个组件共用的配置提取成一个混入对象
@@ -70,7 +70,7 @@
 
 ### plugins 插件
 
-样例[plugins.js](./03_mixin_plugin_scoped_src/plugins.js)
+样例：[plugins.js](./03_mixin_plugin_scoped_src/plugins.js)
 
 ```
     功能：增强Vue
@@ -80,8 +80,36 @@
 
 ### scope 定义样式作用域
 
-样例[School.vue](./03_mixin_plugin_scoped_src/components/School.vue)
+样例：[School.vue](./03_mixin_plugin_scoped_src/components/School.vue)
 
 ```
     通过在定义样式时使用<style scoped>让样式在局部生效，防止冲突
+```
+
+### 自定义事件
+
+样例：[example](./04_customEvent_src)
+
+```
+    1. 一种组件的通信方式 子组件===>父组件
+    2. 使用场景：子组件想给父组件传数据，那么要在父组件中给子组件绑定自定义事件
+    3. 绑定自定义事件
+        a. 使用v-on，例如: <demo @eventName='method'>
+        b. 使用ref，在父组件挂载完成时添加。例如:
+            <demo ref='demo'>
+            ...
+            mounted(){
+                ...
+                this.$refs.demo.$on('eventName', method)
+            }
+        c. 可以使用once修饰符使事件只触发一次
+    4. 解绑:
+        - this.$off(['eventName1', 'eventName2'...]) // unbind list
+        - this.$off('eventName') // unbind one
+        - this.$off() // unbind all
+    5. 触发自定义事件: this.$emit('eventName', ...params)
+    6. 组件上也可以绑定原生DOM事件，但需要使用native修饰符。
+       如果不加修饰符，会认为是自定义事件
+       例如: <demo @click.native='...'>
+    7. Warning: 通过this.$refs.demo.$on('eventName', method)绑定自定义事件时，method要么在methods中，要么使用箭头函数
 ```
