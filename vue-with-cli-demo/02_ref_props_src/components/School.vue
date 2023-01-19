@@ -3,15 +3,11 @@
 		<!-- 组件的结构 -->
 		<h2>学校地址: {{ address }}</h2>
 		<h2>学校名称: {{ name }}</h2>
-		<button @click="sayHello">click me to test hello</button>
-		<!-- 测试定义的指令 -->
-		<input type="text" v-fbind="name" />
+		<button @click="showMsg">click me to show</button>
 	</div>
 </template>
 
 <script>
-import { hunru } from "../mixin";
-
 // 组件的交互代码
 export default {
 	name: "school-component",
@@ -22,15 +18,14 @@ export default {
 		};
 	},
 	methods: {
-		sayHello() {
-			this.hello();
+		showMsg() {
+			alert(this.name);
 		},
 	},
-	mixins: [hunru],
 };
 </script>
 
-<style scoped>
+<style>
 .demo {
 	background-color: orange;
 }
