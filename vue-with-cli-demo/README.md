@@ -115,7 +115,9 @@
 ```
 
 ### 全局事件总线
+
 样例：[global bus](./05_global_bus_src/)
+
 ```
     可以在任意组件之间进行通信，满足一下条件
         - 所有组件对象都能使用它--->通过prototype
@@ -123,9 +125,54 @@
 ```
 
 ### 消息订阅与发布
+
 样例: [subscribe and publish](./06_subAndPub_src/)
+
 ```
     1. install: npm install pubsub-js@1.6.0 // 目前只有1.6.0版本支持订阅和发布
     2. 引用: import pubsub form 'pubsub-js'
     3. 建议在beforeDestroy中使用pubsub.unsubscribe(pid)取消订阅
+```
+
+### $nextTick
+
+样例: [nextTick](./07_nextTick_src/)
+
+```
+    原因：VUE更新DOM是在每个函数接收才会去更新
+    作用：在下一次DOM元素更新结束后执行其指定的回调
+    什么时候用：当改变数据后要基于更新后的DOM进行某些操作时，要在nextTick所指定的回调函数中执行
+
+```
+
+### Animate 动画效果
+
+样例: [example](./07_nextTick_src/components/Test.vue)
+
+```
+    install: npm install animate.css --save
+```
+
+you can see more at [Animate.css](https://animate.style/)
+
+
+### axios
+
+样例: [demo](./08_axios_src/components/Test.vue)
+
+```
+    install: npm install axios
+```
+
+### slot
+
+样例: [slot](./09_slot-demo_src)
+
+```
+    1. 让父组件可以向子组件指定位置插入html结构，也是一种组件之间通信的方式
+    2. 分类：
+        a. 默认插槽
+        b. 具名插槽: 父组件指明放入子组件的那个插槽 通过标签 slot='slot-name'定位
+        c. 作用域插槽: 当数据在子组件中，但渲染的结构由父组件确定时。通过slot-scope='data'接收
+           data是一个结构体对象，可以使用es6语法解构获取相关值
 ```
