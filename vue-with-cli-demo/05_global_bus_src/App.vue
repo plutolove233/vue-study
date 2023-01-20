@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<school />
-		<student :stu_name="'xxx'" :age="18" :sex="'male'"/>
+		<student :name="'xxx'" :age="18" :sex="'male'"/>
 	</div>
 </template>
 

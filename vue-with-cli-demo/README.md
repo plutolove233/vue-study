@@ -113,3 +113,19 @@
        例如: <demo @click.native='...'>
     7. Warning: 通过this.$refs.demo.$on('eventName', method)绑定自定义事件时，method要么在methods中，要么使用箭头函数
 ```
+
+### 全局事件总线
+样例：[global bus](./05_global_bus_src/)
+```
+    可以在任意组件之间进行通信，满足一下条件
+        - 所有组件对象都能使用它--->通过prototype
+        - 这个对象能够使用$on,$emit,$off操作--->vm
+```
+
+### 消息订阅与发布
+样例: [subscribe and publish](./06_subAndPub_src/)
+```
+    1. install: npm install pubsub-js@1.6.0 // 目前只有1.6.0版本支持订阅和发布
+    2. 引用: import pubsub form 'pubsub-js'
+    3. 建议在beforeDestroy中使用pubsub.unsubscribe(pid)取消订阅
+```
