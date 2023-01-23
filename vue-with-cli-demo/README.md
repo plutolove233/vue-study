@@ -155,7 +155,6 @@
 
 you can see more at [Animate.css](https://animate.style/)
 
-
 ### axios
 
 样例: [demo](./08_axios_src/components/Test.vue)
@@ -176,3 +175,91 @@ you can see more at [Animate.css](https://animate.style/)
         c. 作用域插槽: 当数据在子组件中，但渲染的结构由父组件确定时。通过slot-scope='data'接收
            data是一个结构体对象，可以使用es6语法解构获取相关值
 ```
+
+### vuex-demo
+
+样例: [vuex](./10_module_vuex_src/)
+
+1. 理解 vuex: 专门在 vue 中实现集中式数据管理的插件
+2. 搭建 vuex 环境: npm i vuex@3 // vue2 必须设置版本为 3
+3. 基本使用:
+   - 获取 vuex 中的数据(state):
+   ```js
+   this.$store.state.xxx;
+   ```
+   - 修改 vuex 中的数据:
+   ```js
+   this.$store.dispatch("method name", data);
+   or;
+   this.$store.commit("method name", data);
+   ```
+   - 获取 vuex 中修饰过的数据(getter):
+   ```js
+   this.$store.getters.xxx;
+   ```
+4. map 方法使用:
+   - 导入:
+   ```js
+   import { mapState, mapGetters } from "vuex";
+   ```
+   - 借助计算属性实现:
+     - 获取 vuex 中的数据(state):
+     ```js
+     ...mapState(['xxx'])
+     or
+     ...mapState({name: 'xxx'})
+     ```
+     - 获取 vuex 中修饰过的数据(getter):
+     ```js
+     ...mapGetters(['xxx'])
+     or
+     ...mapGetters({name: 'xxx'})
+     ```
+   - 借助 methods 实现:
+     - 修改 vuex 中的数据:
+     ```js
+     Actions: ...mapActions({componentMethodName: 'action_name'})
+           or ...mapActions(['action_name'])
+     Mutations: ...mapMutations({componentMethodName: 'mutations_name'})
+             or ...mapActions(['mutations_name'])
+     ```
+5. 模块化+命名空间
+   (1) 目的: 提高代码维护性，让多种数据分类明确
+   (2) 为解决不同模块命名冲突的问题，将模块的 namespaced 置为 true
+   (3) 样例： 模块[persons](./10_module_vuex_src/store/persons.js) 导入模块[index](./10_module_vuex_src/store/index.js)
+   (4) 获取数据:
+   - 读取 state 数据:
+   ```js
+   // 方式 1:直接读取
+   this.$store.state.moduleName.dataName
+   // 方式 2: 借助mapState
+   ...mapState('moduleName', ['dataName'...])
+   ```
+   - 读取 getter 数据:
+   ```js
+   // 方式 1
+   this.$store.getters['moduleName/getterName']
+   // 方式 2
+   ...mapGetters('moduleName', ['getterName'...])
+   ```
+   - 调用方法:
+     - dispatch:
+     ```js
+     // method 1
+     this.$store.dispatch('moduleName/actionName', data)
+     // method 2
+     ...mapActions('moduleName', ['actionName'])
+     ...mapActions('moduleName', {
+         methodName: 'actionName'
+     })
+     ```
+     - commit:
+     ```js
+     //method 1
+     this.$store.commit('moduleName/mutationName', data)
+     // method 2
+     ...mapMutations('moduleName', ['mutationName'])
+     ...mapMutations('moduleName', {
+         methodName: 'mutationName'
+     })
+     ```
