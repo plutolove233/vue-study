@@ -264,43 +264,48 @@ you can see more at [Animate.css](https://animate.style/)
      })
      ```
 
-
 ### vue-router
 
 样例: [example](./11_router_src/)
 
-1. 目的: 实现SPA应用
+1. 目的: 实现 SPA 应用
 2. 基本路由：
-    1. 安装: npm i vue-router@3 // vue2 必须设置版本为 3
-    2. 应用插件 Vue.use(VueRouter)
-    3. 编写配置[==>router config](./11_router_src/router/index.js)
-    4. 实现切换:
-    ```html
-    <router-link> ... </router-link>
-    ```
-    5. 指定展示位:
-    ```html
-    <router-view />
-    ```
-    6. notice: 路由组件一般放在pages中，而不是components中
-3. 参数传递：
-    1. query传递[==>example@line 5](./11_router_src/pages/homeMessagePage.vue)
-    2. params传递[==>example@line 25](./11_router_src/pages/homeMessagePage.vue)
-<font color='red'>注意：当使用params传递参数时，必须通过路由name作为配置项</font>
-    3. 路由的props配置: [you can see example here@line 27](./11_router_src/router/index.js)
+   1. 安装: npm i vue-router@3 // vue2 必须设置版本为 3
+   2. 应用插件 Vue.use(VueRouter)
+   3. 编写配置[==>router config](./11_router_src/router/index.js)
+   4. 实现切换:
+   ```html
+   <router-link> ... </router-link>
+   ```
+   5. 指定展示位:
+   ```html
+   <router-view />
+   ```
+   6. notice: 路由组件一般放在 pages 中，而不是 components 中
+3. 参数传递： 1. query 传递[==>example@line 5](./11_router_src/pages/homeMessagePage.vue) 2. params 传递[==>example@line 25](./11_router_src/pages/homeMessagePage.vue)
+   <font color='red'>注意：当使用 params 传递参数时，必须通过路由 name 作为配置项</font> 3. 路由的 props 配置: [you can see example here@line 27](./11_router_src/router/index.js)
 
 4. 编程式导航:
-    ```
-    - this.$router.push({...})    内传的对象与'router-link'中的to相同
-    - this.$router.replace({...})
-    - this.$router.forward()      前进
-    - this.$router.back()         后退
-    - this.$router.go(n)          n为正数，前进；否则后退
-    ```
+   ```
+   - this.$router.push({...})    内传的对象与'router-link'中的to相同
+   - this.$router.replace({...})
+   - this.$router.forward()      前进
+   - this.$router.back()         后退
+   - this.$router.go(n)          n为正数，前进；否则后退
+   ```
 5. 缓存路由组件:
-    1. 作用: 让不展示的组件保持挂载
-    2. 例如: [you can see example here@line 24](./11_router_src/pages/homePage.vue)
-    <font color='red'>keep-alive中的include和exclude应传组件的名字</font>
+
+   1. 作用: 让不展示的组件保持挂载
+   2. 例如: [you can see example here@line 24](./11_router_src/pages/homePage.vue)
+      <font color='red'>keep-alive 中的 include 和 exclude 应传组件的名字</font>
 
 6. 路由组件特定的生命周期:
-    - activated&deactivated [example@line51](./11_router_src/pages/homeNewsPage.vue)
+   - activated&deactivated [example@line51](./11_router_src/pages/homeNewsPage.vue)
+
+### 路由守卫
+
+1. 作用: 对路由进行权限控制
+2. 分类:
+   1. 全局守卫[example@line 69](./12_router_guard_src/router/index.js)
+   2. 独享守卫[example@line 29](./12_router_guard_src/router/index.js)
+   3. 组件守卫[example@line 9](./12_router_guard_src/pages/aboutPage.vue)

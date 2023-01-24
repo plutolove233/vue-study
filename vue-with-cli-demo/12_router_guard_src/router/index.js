@@ -29,7 +29,7 @@ const router = new VueRouter({
                     beforeEnter(to, from, next) {
                         if (localStorage.getItem('school') === 'NCEPU') {
                             next()
-                        } else {
+                        }else{
                             alert('无权查看')
                         }
                     },
