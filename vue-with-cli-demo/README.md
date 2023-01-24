@@ -309,3 +309,14 @@ you can see more at [Animate.css](https://animate.style/)
    1. 全局守卫[example@line 69](./12_router_guard_src/router/index.js)
    2. 独享守卫[example@line 29](./12_router_guard_src/router/index.js)
    3. 组件守卫[example@line 9](./12_router_guard_src/pages/aboutPage.vue)
+
+### element-ui
+
+1. 安装: npm i element-ui -S
+2. 配置babel(按需引入):
+    install:
+    ```
+    npm install babel-plugin-component -D
+    ```
+    [config](./babel.config.js)
+3. 按需引入[example](./13_elementui_src/main.js)
